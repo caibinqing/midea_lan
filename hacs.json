@@ -1,6 +1,6 @@
 {
   "name": "Midea AC LAN",
   "homeassistant": "2024.4.1",
-  "zip_release": true,
+  "zip_release": false,
   "filename": "midea_ac_lan.zip"
 }
