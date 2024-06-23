@@ -29,6 +29,7 @@ from homeassistant.const import (
     MINOR_VERSION,
 )
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.device_registry import DeviceEntry
 from homeassistant.helpers.typing import ConfigType
 from midealocal.device import DeviceType, MideaDevice, ProtocolVersion
 from midealocal.devices import device_selector
@@ -341,3 +342,14 @@ async def _async_migrate_device_identifiers(
         # Leave outer for loop if device entry is already found.
         if device_entry_found:
             break
+
+
+async def async_remove_config_entry_device(
+    hass: HomeAssistant,  # noqa: ARG001
+    config_entry: ConfigEntry,
+    device_entry: DeviceEntry,
+) -> bool:
+    """Remove a config entry from a device."""
+    # reference: https://developers.home-assistant.io/docs/device_registry_index/#removing-devices
+    _LOGGER.debug("[%s] Remove device: %s", config_entry.unique_id, device_entry.id)
+    return True
