@@ -227,6 +227,9 @@
       }
     },
     "number": {
+      "direction": {
+        "name": "Direction"
+      },
       "dry_level": {
         "name": "Dry Level"
       },

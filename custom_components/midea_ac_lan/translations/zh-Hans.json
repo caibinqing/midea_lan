@@ -227,6 +227,9 @@
       }
     },
     "number": {
+      "direction": {
+        "name": "风向"
+      },
       "dry_level": {
         "name": "Dry Level"
       },

@@ -19,8 +19,8 @@ from midealocal.devices.b6 import MideaB6Device
 from midealocal.devices.ce import DeviceAttributes as CEAttributes
 from midealocal.devices.ce import MideaCEDevice
 from midealocal.devices.fa import MideaFADevice
+from midealocal.devices.x40 import DIRECTION_OSCILLATE, DIRECTION_STOP, MideaX40Device
 from midealocal.devices.x40 import DeviceAttributes as X40Attributes
-from midealocal.devices.x40 import MideaX40Device
 
 from .const import DEVICES, DOMAIN
 from .midea_devices import MIDEA_DEVICES
@@ -86,9 +86,9 @@ class MideaFan(MideaEntity, FanEntity):
         return cast(bool, self._device.get_attribute("power"))
 
     @property
-    def oscillating(self) -> bool:
+    def oscillating(self) -> bool | None:
         """Midea Fan oscillating."""
-        return cast(bool, self._device.get_attribute("oscillate"))
+        return cast(bool | None, self._device.get_attribute("oscillate"))
 
     @property
     def preset_mode(self) -> str | None:
@@ -313,3 +313,14 @@ class MideaX40Fan(MideaFan):
     def turn_off(self, **kwargs: Any) -> None:  # noqa: ANN401, ARG002
         """Midea X40 Fan turn off."""
         self._device.set_attribute(attr=X40Attributes.fan_speed, value=0)
+
+    def oscillate(self, oscillating: bool) -> None:
+        """Oscillate the fan."""
+        if self.is_on:
+            value = DIRECTION_OSCILLATE if oscillating else DIRECTION_STOP
+            self._device.set_attribute(attr=X40Attributes.direction, value=value)
+
+    @property
+    def oscillating(self) -> bool | None:
+        """Return whether or not the fan is currently oscillating."""
+        return cast(bool | None, self._device.get_attribute(X40Attributes.oscillation))

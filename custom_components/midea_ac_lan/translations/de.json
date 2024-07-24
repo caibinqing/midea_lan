@@ -272,6 +272,11 @@
         "name": "Water Level Setting"
       }
     },
+    "number": {
+      "direction": {
+        "name": "Direction"
+      }
+    },
     "sensor": {
       "bathing_leaving_temperature": {
         "name": "Bathing Leaving Water Temperature"
