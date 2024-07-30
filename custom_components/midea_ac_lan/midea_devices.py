@@ -2624,6 +2624,7 @@ MIDEA_DEVICES: dict[int, dict[str, dict[str, Any] | str]] = {
                 "translation_key": "water_consumption",
                 "name": "Water Consumption",
                 "icon": "mdi:water-pump",
+                "device_class": SensorDeviceClass.WATER,
                 "unit": UnitOfVolume.LITERS,
                 "state_class": SensorStateClass.TOTAL_INCREASING,
             },
