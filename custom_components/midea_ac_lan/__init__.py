@@ -49,8 +49,13 @@ from .const import (
     EXTRA_SWITCH,
 )
 from .midea_devices import MIDEA_DEVICES
+from .midealocal_patch import apply_patches
 
 _LOGGER = logging.getLogger(__name__)
+
+# Applied at import time so it is in place before any device is built, both by
+# `async_setup_entry` and by the config flow.
+apply_patches()
 
 
 async def update_listener(hass: HomeAssistant, config_entry: ConfigEntry) -> None:
